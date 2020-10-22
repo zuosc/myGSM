@@ -480,6 +480,10 @@ namespace myGSM
                 this.sp.DataReceived -= sp_DataReceived;
                 this.sp.Write("AT+CMGF=1" + "\r");//设置为text模式
                 Thread.Sleep(200);
+                if (phone.StartsWith("+"))
+                {
+                    phone = phone.Remove(0, 1).Replace(" ", "");
+                }
                 this.sp.Write("AT+CMGS=" + phone + "\r");
                 this.sp.ReadTo(">");
                 this.sp.DiscardInBuffer();
@@ -515,9 +519,14 @@ namespace myGSM
         {
             string str = "";
             //检查手机号码是否按照标准格式写，如果不是则补上
-            if (phone.Substring(0, 2) != "86")
+            /*  if (phone.Substring(0, 2) != "86")
+              {
+                  phone = string.Format("86{0}", phone);
+              }*/
+
+            if (phone.StartsWith("+"))
             {
-                phone = string.Format("86{0}", phone);
+                phone = phone.Remove(0, 1).Replace(" ", "");
             }
             char[] c = this.getChar(phone);
             for (int i = 0; i <= c.Length - 2; i += 2)

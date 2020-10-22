@@ -40,6 +40,8 @@
             this.btnSendMsg = new System.Windows.Forms.Button();
             this.btnCall = new System.Windows.Forms.Button();
             this.gbox1 = new System.Windows.Forms.GroupBox();
+            this.getIMEI = new System.Windows.Forms.Button();
+            this.clearButton = new System.Windows.Forms.Button();
             this.btnIsAutoDel = new System.Windows.Forms.Button();
             this.txtAT = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -58,6 +60,7 @@
             this.btnGetUnSendMsg = new System.Windows.Forms.Button();
             this.labStatus = new System.Windows.Forms.Label();
             this.gbox2 = new System.Windows.Forms.GroupBox();
+            this.richTextBox = new System.Windows.Forms.RichTextBox();
             this.gbox3 = new System.Windows.Forms.GroupBox();
             this.rbtnPDU = new System.Windows.Forms.RadioButton();
             this.rbtnText = new System.Windows.Forms.RadioButton();
@@ -67,9 +70,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gbox4 = new System.Windows.Forms.GroupBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.richTextBox = new System.Windows.Forms.RichTextBox();
-            this.clearButton = new System.Windows.Forms.Button();
-            this.getIMEI = new System.Windows.Forms.Button();
             this.gbox1.SuspendLayout();
             this.gbox2.SuspendLayout();
             this.gbox3.SuspendLayout();
@@ -155,7 +155,7 @@
             // btnSendMsg
             // 
             this.btnSendMsg.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSendMsg.Location = new System.Drawing.Point(465, 18);
+            this.btnSendMsg.Location = new System.Drawing.Point(533, 18);
             this.btnSendMsg.Name = "btnSendMsg";
             this.btnSendMsg.Size = new System.Drawing.Size(105, 23);
             this.btnSendMsg.TabIndex = 23;
@@ -166,7 +166,7 @@
             // btnCall
             // 
             this.btnCall.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCall.Location = new System.Drawing.Point(354, 18);
+            this.btnCall.Location = new System.Drawing.Point(422, 18);
             this.btnCall.Name = "btnCall";
             this.btnCall.Size = new System.Drawing.Size(105, 23);
             this.btnCall.TabIndex = 22;
@@ -207,6 +207,26 @@
             this.gbox1.TabIndex = 33;
             this.gbox1.TabStop = false;
             this.gbox1.Text = "操作区";
+            // 
+            // getIMEI
+            // 
+            this.getIMEI.Location = new System.Drawing.Point(7, 203);
+            this.getIMEI.Name = "getIMEI";
+            this.getIMEI.Size = new System.Drawing.Size(145, 23);
+            this.getIMEI.TabIndex = 53;
+            this.getIMEI.Text = "获取IMEI";
+            this.getIMEI.UseVisualStyleBackColor = true;
+            this.getIMEI.Click += new System.EventHandler(this.getIMEI_Click);
+            // 
+            // clearButton
+            // 
+            this.clearButton.Location = new System.Drawing.Point(158, 254);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(143, 33);
+            this.clearButton.TabIndex = 37;
+            this.clearButton.Text = "清除信息";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // btnIsAutoDel
             // 
@@ -387,6 +407,14 @@
             this.gbox2.TabStop = false;
             this.gbox2.Text = "信息显示";
             // 
+            // richTextBox
+            // 
+            this.richTextBox.Location = new System.Drawing.Point(6, 14);
+            this.richTextBox.Name = "richTextBox";
+            this.richTextBox.Size = new System.Drawing.Size(463, 362);
+            this.richTextBox.TabIndex = 0;
+            this.richTextBox.Text = "";
+            // 
             // gbox3
             // 
             this.gbox3.Controls.Add(this.rbtnPDU);
@@ -408,7 +436,7 @@
             // 
             this.rbtnPDU.AutoSize = true;
             this.rbtnPDU.Checked = true;
-            this.rbtnPDU.Location = new System.Drawing.Point(258, 24);
+            this.rbtnPDU.Location = new System.Drawing.Point(326, 24);
             this.rbtnPDU.Name = "rbtnPDU";
             this.rbtnPDU.Size = new System.Drawing.Size(89, 16);
             this.rbtnPDU.TabIndex = 25;
@@ -419,7 +447,7 @@
             // rbtnText
             // 
             this.rbtnText.AutoSize = true;
-            this.rbtnText.Location = new System.Drawing.Point(169, 25);
+            this.rbtnText.Location = new System.Drawing.Point(237, 25);
             this.rbtnText.Name = "rbtnText";
             this.rbtnText.Size = new System.Drawing.Size(83, 16);
             this.rbtnText.TabIndex = 24;
@@ -430,7 +458,7 @@
             // 
             this.txtContent.Location = new System.Drawing.Point(50, 47);
             this.txtContent.Name = "txtContent";
-            this.txtContent.Size = new System.Drawing.Size(520, 21);
+            this.txtContent.Size = new System.Drawing.Size(588, 21);
             this.txtContent.TabIndex = 3;
             this.txtContent.Text = "我就来测试短信哦";
             // 
@@ -445,20 +473,20 @@
             // 
             // txtTel
             // 
-            this.txtTel.Location = new System.Drawing.Point(50, 20);
+            this.txtTel.Location = new System.Drawing.Point(118, 20);
             this.txtTel.Name = "txtTel";
             this.txtTel.Size = new System.Drawing.Size(100, 21);
             this.txtTel.TabIndex = 1;
-            this.txtTel.Text = "15000450819";
+            this.txtTel.Text = "+1 2132422281";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 12);
+            this.label1.Size = new System.Drawing.Size(107, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "号码:";
+            this.label1.Text = "号码(带上国家码):";
             // 
             // gbox4
             // 
@@ -475,34 +503,6 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 3000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // richTextBox
-            // 
-            this.richTextBox.Location = new System.Drawing.Point(6, 14);
-            this.richTextBox.Name = "richTextBox";
-            this.richTextBox.Size = new System.Drawing.Size(463, 362);
-            this.richTextBox.TabIndex = 0;
-            this.richTextBox.Text = "";
-            // 
-            // clearButton
-            // 
-            this.clearButton.Location = new System.Drawing.Point(158, 254);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(143, 33);
-            this.clearButton.TabIndex = 37;
-            this.clearButton.Text = "清除信息";
-            this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
-            // 
-            // getIMEI
-            // 
-            this.getIMEI.Location = new System.Drawing.Point(7, 203);
-            this.getIMEI.Name = "getIMEI";
-            this.getIMEI.Size = new System.Drawing.Size(145, 23);
-            this.getIMEI.TabIndex = 53;
-            this.getIMEI.Text = "获取IMEI";
-            this.getIMEI.UseVisualStyleBackColor = true;
-            this.getIMEI.Click += new System.EventHandler(this.getIMEI_Click);
             // 
             // frmMain
             // 
