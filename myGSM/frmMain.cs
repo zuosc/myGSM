@@ -172,8 +172,9 @@ namespace myGSM
 
         private void btnGetMsgByIndex_Click(object sender, EventArgs e)
         {
-            string msg = gsm.ReadMsgByIndex(Convert.ToInt32(txtxuhao1.Text.Trim()));
-            richTextBox.AppendText("获取指定序号短信成功\r\n");
+            int index = Convert.ToInt32(txtxuhao1.Text.Trim());
+            string msg = gsm.ReadMsgByIndex(index);
+            richTextBox.AppendText($"获取序号{index}短信成功\r\n");
             if (msg.Length != 0)
             {
                 richTextBox.AppendText($"{msg}\r\n");
@@ -182,13 +183,14 @@ namespace myGSM
 
         private void btnDeleteMsgByIndex_Click(object sender, EventArgs e)
         {
-            if (gsm.DelMsgByIndex(Convert.ToInt32(txtxuhao2.Text.Trim())))
+            int index = Convert.ToInt32(txtxuhao2.Text.Trim());
+            if (gsm.DelMsgByIndex(index))
             {
-                richTextBox.AppendText("删除指定序号短信成功\r\n");
+                richTextBox.AppendText($"删除序号{index}短信成功\r\n");
             }
             else
             {
-                richTextBox.AppendText("删除指定序号短信失败\r\n");
+                richTextBox.AppendText($"删除序号{index}短信失败\r\n");
             }
         }
 
