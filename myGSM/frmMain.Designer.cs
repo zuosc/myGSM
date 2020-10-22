@@ -35,7 +35,6 @@
             this.btnGetAllMsg = new System.Windows.Forms.Button();
             this.txtReceiveMsg = new System.Windows.Forms.TextBox();
             this.btnGetUnReadMsg = new System.Windows.Forms.Button();
-            this.lbox = new System.Windows.Forms.ListBox();
             this.btnGetNum = new System.Windows.Forms.Button();
             this.btnGetJQM = new System.Windows.Forms.Button();
             this.btnSendMsg = new System.Windows.Forms.Button();
@@ -68,6 +67,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gbox4 = new System.Windows.Forms.GroupBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.richTextBox = new System.Windows.Forms.RichTextBox();
+            this.clearButton = new System.Windows.Forms.Button();
             this.gbox1.SuspendLayout();
             this.gbox2.SuspendLayout();
             this.gbox3.SuspendLayout();
@@ -88,7 +89,7 @@
             // btnGetMsgByIndex
             // 
             this.btnGetMsgByIndex.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGetMsgByIndex.Location = new System.Drawing.Point(158, 260);
+            this.btnGetMsgByIndex.Location = new System.Drawing.Point(158, 351);
             this.btnGetMsgByIndex.Name = "btnGetMsgByIndex";
             this.btnGetMsgByIndex.Size = new System.Drawing.Size(143, 23);
             this.btnGetMsgByIndex.TabIndex = 30;
@@ -114,7 +115,7 @@
             this.txtReceiveMsg.Multiline = true;
             this.txtReceiveMsg.Name = "txtReceiveMsg";
             this.txtReceiveMsg.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtReceiveMsg.Size = new System.Drawing.Size(573, 63);
+            this.txtReceiveMsg.Size = new System.Drawing.Size(784, 98);
             this.txtReceiveMsg.TabIndex = 28;
             // 
             // btnGetUnReadMsg
@@ -127,17 +128,6 @@
             this.btnGetUnReadMsg.Text = "获取未读短信";
             this.btnGetUnReadMsg.UseVisualStyleBackColor = true;
             this.btnGetUnReadMsg.Click += new System.EventHandler(this.btnGetUnReadMsg_Click);
-            // 
-            // lbox
-            // 
-            this.lbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbox.FormattingEnabled = true;
-            this.lbox.HorizontalScrollbar = true;
-            this.lbox.ItemHeight = 12;
-            this.lbox.Location = new System.Drawing.Point(3, 17);
-            this.lbox.Name = "lbox";
-            this.lbox.Size = new System.Drawing.Size(251, 280);
-            this.lbox.TabIndex = 26;
             // 
             // btnGetNum
             // 
@@ -185,6 +175,7 @@
             // 
             // gbox1
             // 
+            this.gbox1.Controls.Add(this.clearButton);
             this.gbox1.Controls.Add(this.btnIsAutoDel);
             this.gbox1.Controls.Add(this.txtAT);
             this.gbox1.Controls.Add(this.label6);
@@ -210,7 +201,7 @@
             this.gbox1.Controls.Add(this.btnGetJQM);
             this.gbox1.Location = new System.Drawing.Point(12, 12);
             this.gbox1.Name = "gbox1";
-            this.gbox1.Size = new System.Drawing.Size(315, 301);
+            this.gbox1.Size = new System.Drawing.Size(315, 382);
             this.gbox1.TabIndex = 33;
             this.gbox1.TabStop = false;
             this.gbox1.Text = "操作区";
@@ -228,7 +219,7 @@
             // 
             // txtAT
             // 
-            this.txtAT.Location = new System.Drawing.Point(52, 204);
+            this.txtAT.Location = new System.Drawing.Point(52, 295);
             this.txtAT.Name = "txtAT";
             this.txtAT.Size = new System.Drawing.Size(100, 21);
             this.txtAT.TabIndex = 51;
@@ -237,7 +228,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(11, 207);
+            this.label6.Location = new System.Drawing.Point(11, 298);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 12);
             this.label6.TabIndex = 50;
@@ -245,7 +236,7 @@
             // 
             // txtxuhao2
             // 
-            this.txtxuhao2.Location = new System.Drawing.Point(52, 233);
+            this.txtxuhao2.Location = new System.Drawing.Point(52, 324);
             this.txtxuhao2.Name = "txtxuhao2";
             this.txtxuhao2.Size = new System.Drawing.Size(100, 21);
             this.txtxuhao2.TabIndex = 49;
@@ -254,7 +245,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 236);
+            this.label5.Location = new System.Drawing.Point(11, 327);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 12);
             this.label5.TabIndex = 48;
@@ -262,7 +253,7 @@
             // 
             // txtxuhao1
             // 
-            this.txtxuhao1.Location = new System.Drawing.Point(52, 262);
+            this.txtxuhao1.Location = new System.Drawing.Point(52, 353);
             this.txtxuhao1.Name = "txtxuhao1";
             this.txtxuhao1.Size = new System.Drawing.Size(100, 21);
             this.txtxuhao1.TabIndex = 47;
@@ -271,7 +262,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 265);
+            this.label4.Location = new System.Drawing.Point(11, 356);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 12);
             this.label4.TabIndex = 46;
@@ -298,7 +289,7 @@
             // btnSendAT
             // 
             this.btnSendAT.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSendAT.Location = new System.Drawing.Point(158, 202);
+            this.btnSendAT.Location = new System.Drawing.Point(158, 293);
             this.btnSendAT.Name = "btnSendAT";
             this.btnSendAT.Size = new System.Drawing.Size(143, 23);
             this.btnSendAT.TabIndex = 43;
@@ -331,7 +322,7 @@
             // btnDeleteMsgByIndex
             // 
             this.btnDeleteMsgByIndex.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDeleteMsgByIndex.Location = new System.Drawing.Point(158, 231);
+            this.btnDeleteMsgByIndex.Location = new System.Drawing.Point(158, 322);
             this.btnDeleteMsgByIndex.Name = "btnDeleteMsgByIndex";
             this.btnDeleteMsgByIndex.Size = new System.Drawing.Size(143, 23);
             this.btnDeleteMsgByIndex.TabIndex = 39;
@@ -386,10 +377,10 @@
             // 
             // gbox2
             // 
-            this.gbox2.Controls.Add(this.lbox);
+            this.gbox2.Controls.Add(this.richTextBox);
             this.gbox2.Location = new System.Drawing.Point(333, 12);
             this.gbox2.Name = "gbox2";
-            this.gbox2.Size = new System.Drawing.Size(257, 301);
+            this.gbox2.Size = new System.Drawing.Size(475, 382);
             this.gbox2.TabIndex = 34;
             this.gbox2.TabStop = false;
             this.gbox2.Text = "信息显示";
@@ -404,9 +395,9 @@
             this.gbox3.Controls.Add(this.label1);
             this.gbox3.Controls.Add(this.btnCall);
             this.gbox3.Controls.Add(this.btnSendMsg);
-            this.gbox3.Location = new System.Drawing.Point(14, 319);
+            this.gbox3.Location = new System.Drawing.Point(14, 400);
             this.gbox3.Name = "gbox3";
-            this.gbox3.Size = new System.Drawing.Size(576, 76);
+            this.gbox3.Size = new System.Drawing.Size(788, 76);
             this.gbox3.TabIndex = 35;
             this.gbox3.TabStop = false;
             this.gbox3.Text = "发送短信+拨打电话";
@@ -470,9 +461,9 @@
             // gbox4
             // 
             this.gbox4.Controls.Add(this.txtReceiveMsg);
-            this.gbox4.Location = new System.Drawing.Point(12, 401);
+            this.gbox4.Location = new System.Drawing.Point(12, 490);
             this.gbox4.Name = "gbox4";
-            this.gbox4.Size = new System.Drawing.Size(579, 83);
+            this.gbox4.Size = new System.Drawing.Size(790, 118);
             this.gbox4.TabIndex = 36;
             this.gbox4.TabStop = false;
             this.gbox4.Text = "接收短信";
@@ -483,11 +474,29 @@
             this.timer1.Interval = 3000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // richTextBox
+            // 
+            this.richTextBox.Location = new System.Drawing.Point(6, 14);
+            this.richTextBox.Name = "richTextBox";
+            this.richTextBox.Size = new System.Drawing.Size(463, 362);
+            this.richTextBox.TabIndex = 0;
+            this.richTextBox.Text = "";
+            // 
+            // clearButton
+            // 
+            this.clearButton.Location = new System.Drawing.Point(158, 254);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(143, 33);
+            this.clearButton.TabIndex = 37;
+            this.clearButton.Text = "清除信息";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(603, 494);
+            this.ClientSize = new System.Drawing.Size(820, 620);
             this.Controls.Add(this.gbox4);
             this.Controls.Add(this.gbox3);
             this.Controls.Add(this.gbox2);
@@ -517,7 +526,6 @@
         private System.Windows.Forms.Button btnGetAllMsg;
         private System.Windows.Forms.TextBox txtReceiveMsg;
         private System.Windows.Forms.Button btnGetUnReadMsg;
-        private System.Windows.Forms.ListBox lbox;
         private System.Windows.Forms.Button btnGetNum;
         private System.Windows.Forms.Button btnGetJQM;
         private System.Windows.Forms.Button btnSendMsg;
@@ -550,6 +558,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnIsAutoDel;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.RichTextBox richTextBox;
+        private System.Windows.Forms.Button clearButton;
     }
 }
 
