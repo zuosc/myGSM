@@ -69,6 +69,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.richTextBox = new System.Windows.Forms.RichTextBox();
             this.clearButton = new System.Windows.Forms.Button();
+            this.getIMEI = new System.Windows.Forms.Button();
             this.gbox1.SuspendLayout();
             this.gbox2.SuspendLayout();
             this.gbox3.SuspendLayout();
@@ -175,6 +176,7 @@
             // 
             // gbox1
             // 
+            this.gbox1.Controls.Add(this.getIMEI);
             this.gbox1.Controls.Add(this.clearButton);
             this.gbox1.Controls.Add(this.btnIsAutoDel);
             this.gbox1.Controls.Add(this.txtAT);
@@ -492,6 +494,16 @@
             this.clearButton.UseVisualStyleBackColor = true;
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
+            // getIMEI
+            // 
+            this.getIMEI.Location = new System.Drawing.Point(7, 203);
+            this.getIMEI.Name = "getIMEI";
+            this.getIMEI.Size = new System.Drawing.Size(145, 23);
+            this.getIMEI.TabIndex = 53;
+            this.getIMEI.Text = "获取IMEI";
+            this.getIMEI.UseVisualStyleBackColor = true;
+            this.getIMEI.Click += new System.EventHandler(this.getIMEI_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -560,6 +572,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.RichTextBox richTextBox;
         private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.Button getIMEI;
     }
 }
 

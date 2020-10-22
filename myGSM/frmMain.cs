@@ -236,5 +236,10 @@ namespace myGSM
         {
             richTextBox.Text = "";
         }
+
+        private void getIMEI_Click(object sender, EventArgs e)
+        {
+            richTextBox.AppendText($"IMEI:{ gsm.GeIMEINo()}\r\n");
+        }
     }
 }

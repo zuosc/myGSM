@@ -165,6 +165,37 @@ namespace myGSM
             catch { return "获取短信中心失败"; }
         }
 
+
+        /// <summary>
+        /// 获取短信中心号码
+        /// </summary>
+        /// <returns></returns>
+        public string GeIMEINo()
+        {
+            string temp = string.Empty;
+            try
+            {
+                if (msgCenter != null && msgCenter.Length != 0)
+                {
+                    return msgCenter;
+                }
+                else
+                {
+                    temp = this.SendAT("AT+CGSN");
+                    if (temp.Substring(temp.Length - 4, 3).Trim() == "OK")
+                    {
+                        temp = temp.Substring(0, 16).Trim();
+                    }
+                    else
+                    {
+                        temp = "获取IMEI失败";
+                    }
+                    return temp;
+                }
+            }
+            catch { return "获取IMEI失败"; }
+        }
+
         /// <summary>
         /// 取得未读信息列表
         /// </summary>
