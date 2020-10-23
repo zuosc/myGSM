@@ -262,7 +262,7 @@
             this.txtxuhao2.Name = "txtxuhao2";
             this.txtxuhao2.Size = new System.Drawing.Size(100, 21);
             this.txtxuhao2.TabIndex = 49;
-            this.txtxuhao2.Text = "0";
+            this.txtxuhao2.Text = "1";
             // 
             // label5
             // 
@@ -279,7 +279,7 @@
             this.txtxuhao1.Name = "txtxuhao1";
             this.txtxuhao1.Size = new System.Drawing.Size(100, 21);
             this.txtxuhao1.TabIndex = 47;
-            this.txtxuhao1.Text = "0";
+            this.txtxuhao1.Text = "1";
             // 
             // label4
             // 

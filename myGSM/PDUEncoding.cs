@@ -307,7 +307,7 @@ namespace myGSM
         /// </summary>
         /// <param name="strPDU">短信PDU字符串</param>
         /// <returns>信息字符串（中心号码，手机号码，发送时间，短信内容）</returns>
-        public string PDUDecoder(string strPDU)
+        public string PDUDecoder(string index, string strPDU)
         {
             int length = (Convert.ToInt32(strPDU.Substring(0, 2), 0x10) * 2) + 2;
             this.serviceCenterAddress = strPDU.Substring(0, length);
@@ -323,7 +323,7 @@ namespace myGSM
             this.userDataLenghth = strPDU.Substring((length + num2) + 20, 2);
             Convert.ToInt32(this.userDataLenghth, 0x10);
             this.userData = strPDU.Substring((length + num2) + 0x16);
-            return (util.formatMsg(this.OriginatorAddress, this.UserData, this.ServiceCenterTimeStamp));
+            return (util.formatMsg(index, this.OriginatorAddress, this.UserData, this.ServiceCenterTimeStamp));
         }
 
 

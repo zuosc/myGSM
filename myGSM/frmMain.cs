@@ -23,7 +23,7 @@ namespace myGSM
 
         void Updata1()
         {
-            txtReceiveMsg.Text = "收到新消息:" + gsm.ReadNewMsg();
+            txtReceiveMsg.Text = "收到新消息：\r\n" + gsm.ReadNewMsg();
         }
 
         private void changeStatus(bool b)
@@ -38,12 +38,17 @@ namespace myGSM
             btnOpen.Enabled = true;
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmMain_Load(object sender, EventArgs e)
         {
             cboxPort.Items.AddRange(SerialPort.GetPortNames());
             if (cboxPort.Items.Count > 0)
             {
-                cboxPort.SelectedIndex = 0;
+                cboxPort.SelectedIndex = cboxPort.Items.Count - 1;
             }
             this.changeStatus(false);
         }

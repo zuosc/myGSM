@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.IO.Ports;
+using System.Linq;
 
 namespace myGSM
 {
@@ -182,9 +183,10 @@ namespace myGSM
                 else
                 {
                     temp = this.SendAT("AT+CGSN");
+
                     if (temp.Substring(temp.Length - 4, 3).Trim() == "OK")
                     {
-                        temp = temp.Substring(0, 16).Trim();
+                        temp = temp.Split(Environment.NewLine.ToCharArray()).OrderByDescending(it => it.Length).FirstOrDefault();
                     }
                     else
                     {
@@ -211,15 +213,7 @@ namespace myGSM
             {
                 temp = tt.Split('\r');
             }
-            PDUEncoding pe = new PDUEncoding();
-            foreach (string str in temp)
-            {
-                if (str != null && str.Length != 0 && str.Substring(0, 2).Trim() != "+C" && str.Substring(0, 2) != "OK" && str.Substring(0, 2) != "AT")
-                {
-                    myResult.Add(pe.PDUDecoder(str));
-                }
-            }
-            return myResult;
+            return digestAT_CMGL(temp);
         }
 
         /// <summary>
@@ -237,15 +231,7 @@ namespace myGSM
             {
                 temp = tt.Split('\r');
             }
-            PDUEncoding pe = new PDUEncoding();
-            foreach (string str in temp)
-            {
-                if (str != null && str.Length != 0 && str.Substring(0, 2).Trim() != "+C" && str.Substring(0, 2) != "OK" && str.Substring(0, 2) != "AT")
-                {
-                    myResult.Add(pe.PDUDecoder(str));
-                }
-            }
-            return myResult;
+            return digestAT_CMGL(temp);
         }
 
         /// <summary>
@@ -263,15 +249,7 @@ namespace myGSM
             {
                 temp = tt.Split('\r');
             }
-            PDUEncoding pe = new PDUEncoding();
-            foreach (string str in temp)
-            {
-                if (str != null && str.Length != 0 && str.Substring(0, 2).Trim() != "+C" && str.Substring(0, 2) != "OK" && str.Substring(0, 2) != "AT")
-                {
-                    myResult.Add(pe.PDUDecoder(str));
-                }
-            }
-            return myResult;
+            return digestAT_CMGL(temp);
         }
 
         /// <summary>
@@ -289,15 +267,7 @@ namespace myGSM
             {
                 temp = tt.Split('\r');
             }
-            PDUEncoding pe = new PDUEncoding();
-            foreach (string str in temp)
-            {
-                if (str != null && str.Length != 0 && str.Substring(0, 2).Trim() != "+C" && str.Substring(0, 2) != "OK" && str.Substring(0, 2) != "AT")
-                {
-                    myResult.Add(pe.PDUDecoder(str));
-                }
-            }
-            return myResult;
+            return digestAT_CMGL(temp);
         }
 
         /// <summary>
@@ -306,24 +276,15 @@ namespace myGSM
         /// <returns></returns>
         public List<string> GetAllMsg()
         {
-            List<string> myResult = new List<string>();
             string[] temp = null;
             string tt = string.Empty;
 
             tt = this.SendAT("AT+CMGL=4");//读取所有信息
             if (tt.Substring(tt.Length - 4, 3).Trim() == "OK")
             {
-                temp = tt.Split('\r');
+                temp = tt.Split(Environment.NewLine.ToCharArray());
             }
-            PDUEncoding pe = new PDUEncoding();
-            foreach (string str in temp)
-            {
-                if (str != null && str.Length != 0 && str.Substring(0, 2).Trim() != "+C" && str.Substring(0, 2) != "OK" && str.Substring(0, 2) != "AT")
-                {
-                    myResult.Add(pe.PDUDecoder(str));
-                }
-            }
-            return myResult;
+            return digestAT_CMGL(temp);
         }
 
         /// <summary>
@@ -712,7 +673,8 @@ namespace myGSM
                 throw new Exception("没有此短信");
             }
 
-            temp = temp.Split((char)(13))[2];       //取出PDU串(char)(13)为0x0a即\r 按\r分为多个字符串 第3个是PDU串
+            // temp = temp.Split((char)(13))[3];       //取出PDU串(char)(13)为0x0a即\r 按\r分为多个字符串 第3个是PDU串
+            temp = temp.Split(Environment.NewLine.ToCharArray()).OrderByDescending(it => it.Length).FirstOrDefault();
 
             pe.PDUDecoder(temp, out msgCenter, out phone, out msg, out time);
 
@@ -724,7 +686,7 @@ namespace myGSM
                 }
                 catch { }
             }
-            return util.formatMsg(phone, msg, time);
+            return util.formatMsg(index.ToString(), phone, msg, time);
         }
 
         /// <summary>
@@ -822,6 +784,26 @@ namespace myGSM
                 this.newMsgIndex = Convert.ToInt32(str.Split(',')[1]);
                 this.GetNewMsg(this, e);
             }
+        }
+
+        /// <summary>
+        /// 解析AT+CMGL=4 获取短信命令CMGL相关的响应
+        /// </summary>
+        /// <param name="list">响应按换行分割得到的数组</param>
+        /// <returns></returns>
+        private List<string> digestAT_CMGL(string[] list)
+        {
+            PDUEncoding pe = new PDUEncoding();
+            List<string> myResult = new List<string>();
+            for (int i = 0; i < list.Length; i++)
+            {
+                if (list[i].StartsWith("+CMGL:"))
+                {
+                    String index = list[i].Split(',')[0].Last().ToString();
+                    myResult.Add(pe.PDUDecoder(index, list[i + 1]));
+                }
+            }
+            return myResult;
         }
     }
 }
