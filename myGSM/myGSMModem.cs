@@ -656,28 +656,23 @@ namespace myGSM
         /// <returns>信息字符串 (中心号码，手机号码，发送时间，短信内容)</returns>
         public string ReadMsgByIndex(int index)
         {
-            string temp = string.Empty;
-            string msgCenter, phone, msg, time;
-            PDUEncoding pe = new PDUEncoding();
+            string[] temp = null;
+            string tt = string.Empty;
             try
             {
-                temp = SendAT("AT+CMGR=" + index.ToString());
+                tt = SendAT("AT+CMGR=" + index.ToString());
             }
             catch (Exception ex)
             {
                 throw ex;
             }
 
-            if (temp.Trim() == "ERROR")
+            if (tt.Trim().Contains("ERROR"))
             {
                 throw new Exception("没有此短信");
             }
-
             // temp = temp.Split((char)(13))[3];       //取出PDU串(char)(13)为0x0a即\r 按\r分为多个字符串 第3个是PDU串
-            temp = temp.Split(Environment.NewLine.ToCharArray()).OrderByDescending(it => it.Length).FirstOrDefault();
-
-            pe.PDUDecoder(temp, out msgCenter, out phone, out msg, out time);
-
+            temp = tt.Split(Environment.NewLine.ToCharArray());
             if (AutoDelMsg)//如果阅读完短信自动删除设置为真
             {
                 try
@@ -686,7 +681,7 @@ namespace myGSM
                 }
                 catch { }
             }
-            return util.formatMsg(index.ToString(), phone, msg, time);
+            return digestAT_CMGL(temp).FirstOrDefault();
         }
 
         /// <summary>
@@ -735,7 +730,7 @@ namespace myGSM
         /// <returns></returns>
         public bool DelMsgByIndex(int index)
         {
-            if (SendAT("AT+CMGD=" + index.ToString()).Trim() == "OK")
+            if (SendAT("AT+CMGD=" + index.ToString()).Trim().Contains("OK"))
             {
                 return true;
             }
@@ -787,7 +782,7 @@ namespace myGSM
         }
 
         /// <summary>
-        /// 解析AT+CMGL=4 获取短信命令CMGL相关的响应
+        /// 解析AT+CMGL=4 获取短信命令CMG*相关的响应
         /// </summary>
         /// <param name="list">响应按换行分割得到的数组</param>
         /// <returns></returns>
@@ -797,7 +792,7 @@ namespace myGSM
             List<string> myResult = new List<string>();
             for (int i = 0; i < list.Length; i++)
             {
-                if (list[i].StartsWith("+CMGL:"))
+                if (list[i].StartsWith("+CMG"))
                 {
                     String index = list[i].Split(',')[0].Last().ToString();
                     myResult.Add(pe.PDUDecoder(index, list[i + 1]));

@@ -179,9 +179,13 @@ namespace myGSM
         {
             int index = Convert.ToInt32(txtxuhao1.Text.Trim());
             string msg = gsm.ReadMsgByIndex(index);
-            richTextBox.AppendText($"获取序号{index}短信成功\r\n");
-            if (msg.Length != 0)
+            if (String.IsNullOrWhiteSpace(msg))
             {
+                richTextBox.AppendText($"序号{index}短信不存在\r\n");
+            }
+            else
+            {
+                richTextBox.AppendText($"获取序号{index}短信成功\r\n");
                 richTextBox.AppendText($"{msg}\r\n");
             }
         }
