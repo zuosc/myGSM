@@ -751,7 +751,7 @@ namespace myGSM
         /// <returns></returns>
         public bool DelAllMsg()
         {
-            if (SendAT("AT+CMGD=1,4") == "OK")
+            if (SendAT("AT+CMGD=1,4").Contains("OK"))
             {
                 return true;
             }
