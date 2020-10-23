@@ -11,3 +11,7 @@ USB转GSM模块 SIM800C GSM/GPRS模组 可以用的上位机软件
 
 
 可以凑合用
+
+
+
+![image](https://raw.githubusercontent.com/zuosc/myGSM_SIM800C/master/%E6%88%AA%E5%9B%BE_16034397478763.png)
